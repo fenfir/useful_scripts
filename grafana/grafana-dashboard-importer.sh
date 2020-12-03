@@ -25,10 +25,9 @@ done
 
 for dash in $(find $DASH_PATH -type f -iname '*-dashboard.json'); do
   folderName=$(jq -r '.meta.folderTitle' $dash)
-  d=$(jq '. | .dashboard.uid = null | .dashboard.id = null | .overwrite = true | del(.meta) | .folderId = '${folders[$folderName]}'' $dash | sed 's/"datasource": "prometheus"/"datasource": "Prometheus"/g')
+  jq '. | .dashboard.uid = null | .dashboard.id = null | .overwrite = true | del(.meta) | .folderId = '${folders[$folderName]}'' $dash | sed 's/"datasource": "prometheus"/"datasource": "Prometheus"/g' > /tmp/data.json
 
   echo -e "\nCreating dashboard $dash in $folderName\n\n"
 
-  echo $d > /tmp/data.json
-  curl -qk -H "Content-Type: application/json" -H "Authorization: Bearer $KEY" -XPOST $HOST/api/dashboards/db -d @/tmp/data.json
+  curl -qk -H "Content-Type: application/json" -H "Authorization: Bearer $KEY" -XPOST $HOST/api/dashboards/db -d '@/tmp/data.json'
 done
