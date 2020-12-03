@@ -10,6 +10,11 @@
     source ~/Documents/kube-ps1/kube-ps1.sh
     ```
 
+## kubectx
+Not technically a prompt decoration but super useful when you have multiple k8s clusters
+
+1. Download kubectx from git (https://github.com/ahmetb/kubectx) and add it to your PATH
+
 ## bash-git-prompt
 1. Download bash-git-prompt from git (https://github.com/magicmonty/bash-git-prompt)
     ```
@@ -23,7 +28,7 @@
 ## git_profile
 If you use multiple github accounts or other git accounts, I have a tool for that also
 
-1. Download bash-git-prompt from git (https://github.com/fenfir/git_profile)
+1. Download git_profile from git (https://github.com/fenfir/git_profile)
     ```
     git checkout git@github.com:fenfir/git_profile.git ~/Documents/git_profile
     ```
@@ -35,6 +40,9 @@ If you use multiple github accounts or other git accounts, I have a tool for tha
 
 # Adding it all Together
 ```
+source <(kubectl completion bash)
+source <(minikube completion bash)
+
 source /home/zach/Documents/kube-ps1/kube-ps1.sh
 source /home/zach/Documents/git-profiles/git_profile.sh
 
